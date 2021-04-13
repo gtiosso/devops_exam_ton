@@ -1,0 +1,10 @@
+<VirtualHost *:443>
+    ServerName www.devops-exam-ton-tiosso.com
+    ServerAlias devops-exam-ton-tiosso.com
+    DocumentRoot /var/www/devops-exam-ton-tiosso/index.php
+    ErrorLog /var/log/httpd/devops-exam-ton-tiosso-error.log
+    CustomLog /var/log/httpd/devops-exam-ton-tiosso.log combined
+    SSLEngine on
+    SSLCertificateFile /etc/httpd/ssl/devops-exam-ton-tiosso.crt
+    SSLCertificateKeyFile /etc/httpd/ssl/devops-exam-ton-tiosso.key
+</VirtualHost>

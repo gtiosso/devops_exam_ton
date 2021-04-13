@@ -1,0 +1,7 @@
+team                  = "Team Tiosso"
+app_source            = "https://github.com/gtiosso/devops-exam-ton/"
+provisioning_tool     = "terraform"
+provisioning_version  = "0.12.6"
+provisioning_source   = "https://github.com/gtiosso/devops-exam-ton/"
+deployment_tool       = "jenkins"
+deployment_build_name = "devops-exam-ton"

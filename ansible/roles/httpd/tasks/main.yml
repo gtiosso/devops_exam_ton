@@ -1,0 +1,65 @@
+---
+# tasks file for Httpd
+- name: Install Httpd
+  yum:
+    name:
+      - httpd
+      - php
+      - mod_ssl
+    state: present
+  tags: httpd
+
+- name: Configure file conf.d/vhosts.conf
+  template:
+    src: "vhosts_conf.j2"
+    dest: /etc/httpd/conf.d/vhosts.conf
+    owner: root
+    group: root
+    mode: 0644
+  tags: httpd
+
+- name: Create SSL certificate directory
+  file:
+    path: /etc/httpd/ssl
+    owner: root
+    group: root
+    state: directory
+    mode: '0755'
+  tags: httpd
+
+- copy:
+    src: generateSSL.sh
+    dest: /tmp/generateSSL.sh
+    owner: root
+    group: root
+    mode: 0755
+  tags: httpd
+
+- name: Run script to generate SSL certificate.
+  shell: /tmp/generateSSL.sh
+  tags: httpd
+
+- name: Create application directory
+  file:
+    path: /var/www/devops-exam-ton-tiosso
+    owner: root
+    group: root
+    state: directory
+    mode: '0755'
+  tags: httpd
+
+- name: Build Application
+  template:
+    src: "index_php.j2"
+    dest: /var/www/devops-exam-ton-tiosso/index.php
+    owner: root
+    group: root
+    mode: 0644
+  tags: httpd
+
+- name: Start service httpd
+  service:
+    name: httpd
+    state: restarted
+    enabled: yes
+  tags: httpd

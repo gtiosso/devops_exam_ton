@@ -1,0 +1,3 @@
+# SSH wrapper so that Git checkouts run by Terraform on Jenkins are able to use
+# a proper identity file
+ssh -i $KEYFILE $*
